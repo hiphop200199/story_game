@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
+/*chrome,opera,safari,edge客製捲軸*/
+::-webkit-scrollbar{
+    -webkit-appearance: none;
+    width:3px;
+}
+::-webkit-scrollbar-track{
+    background:none;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#674636;
+    border-radius:12px;
+}
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+overflow: hidden;
+font-family: "Charm", cursive;
+}
+$color1:#FFF8E8;
+$color2:#F7EED3;
+$color3:#AAB396;
+$color4:#674636;
+
+#logo-image{
+    display: none;  
+  }
+  #box{
+    position: relative;
+    min-height: 100dvh;
+    #title{
+        .letter{
+            opacity: 0;
+            transition-duration: 1s;
+        }
+    }
+  }
+
+
+  @for $i from 1 through 13 {
+    #box #title .letter:nth-of-type(#{$i}){
+        transition-delay: 0.1s + ($i - 1)*0.05s;
+    }
+  }
