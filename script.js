@@ -4,11 +4,46 @@ const TIME_TO_END_ANIMATION = 4000;
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
 const logoImage = document.getElementById("logo-image");
+const closeGameButton = document.getElementById('close-game-button');
+const closeDialogButton = document.getElementById('close-dialog-button');
+const confirm = document.getElementById('confirm');
+const cancel = document.getElementById('cancel');
+const dingSFX = new Audio('ding.mp3');
 let logoAnimation;
 let letters = document.querySelectorAll(".letter");
+let closeGameDialog = document.getElementById('close-game-dialog');
+let start = document.getElementById('start');
+let coverImg = document.getElementById('cover-img');
+let mouse = document.getElementById('mouse');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-  
+ 
+
+
+window.addEventListener('mousemove',function(e){
+    mouse.style.left = e.pageX - 16 + 'px';
+    mouse.style.top = e.pageY - 16 + 'px';
+})
+closeGameButton.addEventListener('click',function () {
+    closeGameDialog.show();
+    closeGameDialog.classList.add('open');
+})
+closeDialogButton.addEventListener('click',function () {
+    closeGameDialog.classList.remove('open');
+    setTimeout(()=>closeGameDialog.close(),500);
+  })
+cancel.addEventListener('click',function () {
+    closeGameDialog.classList.remove('open');
+    setTimeout(()=>closeGameDialog.close(),500);
+  })
+confirm.addEventListener('click',function () {
+   window.close();
+  })
+start.addEventListener('click',function(){
+    dingSFX.pause();
+    dingSFX.currentTime = 0;
+    dingSFX.play(); 
+})
 //mylogo
 //用來生成一個個粒子
 class Particle{
@@ -83,6 +118,8 @@ function cancelAnimationAndShowIndexPage(){
         cancelAnimationFrame(logoAnimation);
         canvas.style.display='none';
       graduallyShowTitle()
+      start.classList.add('in');
+      coverImg.classList.add('in');
     },TIME_TO_END_ANIMATION);
 }
 

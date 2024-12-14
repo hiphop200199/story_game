@@ -1,46 +1,261 @@
-@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap");
 /*chrome,opera,safari,edge客製捲軸*/
-::-webkit-scrollbar{
-    -webkit-appearance: none;
-    width:3px;
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 3px;
 }
-::-webkit-scrollbar-track{
-    background:none;
+::-webkit-scrollbar-track {
+  background: none;
 }
-::-webkit-scrollbar-thumb{
-    background-color:#674636;
-    border-radius:12px;
+::-webkit-scrollbar-thumb {
+  background-color: #674636;
+  border-radius: 12px;
 }
-*{
-padding: 0;
-margin: 0;
-box-sizing: border-box;
-scroll-behavior: smooth;
-overflow: hidden;
-font-family: "Charm", cursive;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-entry;
+  scroll-behavior: smooth;
+  overflow: hidden;
+  font-family: "Charm", cursive;
+  cursor: none;
 }
-$color1:#FFF8E8;
-$color2:#F7EED3;
-$color3:#AAB396;
-$color4:#674636;
+$color1: #fff8e8;
+$color2: #f7eed3;
+$color4: #674636;
+$transitionTime: 0.5s;
+$getInTime: 1s;
 
-#logo-image{
-    display: none;  
+#logo-image {
+  display: none;
+}
+#mouse {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    z-index: 1;
+    pointer-events: none;//客製鼠標本身不要當鼠標事件的對象，不然會干擾到原本鼠標對象的事件
+    img{
+        width: 100%;
+    }
+}
+#close-game-button {
+    position: absolute;
+    right: 1vw;
+    top: 1dvh;
+    z-index: 1;
+    color: #674636;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    transition: $transitionTime;
+    &:hover {
+      filter: brightness(1.5);
+    }
   }
-  #box{
+#entry {
+  position: relative;
+  height: 100dvh;
+  background-color: #fff8e8;
+ 
+  #title {
+    text-align: center;
+    padding-block-start: 2dvh;
+    padding-block-end: 10dvh;
+    .letter {
+      opacity: 0;
+      transition-duration: 1s;
+      color: #674636;
+      font-size: 8rem;
+      font-weight: 700;
+    }
+  }
+  #middle {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    #start {
+      font-size: 4rem;
+      font-weight: 700;
+      background-color: #674636;
+      color: #fff8e8;
+      border: none;
+      opacity: 0;
+      transform: translateX(-200px);
+      border-radius: 10px;
+      padding-inline: 10px;
+      filter: drop-shadow(3px 5px 5px #674636);
+      transition: $getInTime;
+      &:hover {
+        filter: drop-shadow(3px 5px 5px #674636) brightness(1.5);
+      }
+      &.in {
+        transform: none;
+        opacity: 1;
+      }
+    }
+    #cover-img {
+      width: 350px;
+      clip-path: circle(0%);
+      filter: sepia(0.7);
+      opacity: 0;
+      transform: translateX(200px);
+      transition: $getInTime;
+      &.in {
+        clip-path: circle(50%);
+        transform: none;
+        opacity: 1;
+      }
+    }
+  }
+  #copyright {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #674636;
+    color: #fff8e8;
+    text-align: center;
+  }
+}
+#game{
+    display: none;
     position: relative;
-    min-height: 100dvh;
-    #title{
-        .letter{
-            opacity: 0;
-            transition-duration: 1s;
-        }
+    height: 100dvh;
+}
+#close-game-dialog {
+  position: fixed;
+  left: calc(50% - 125px);
+  top: calc(50% - 75px);
+  transform: translateY(100px);
+  opacity: 0;
+  background-color: #f7eed3;
+  width: 250px;
+  height: 150px;
+  border: 3px solid #674636;
+  transition: $transitionTime;
+  #close-dialog-button {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    border: none;
+    background: none;
+    color: #674636;
+    font-size: 1.3rem;
+    transition: $transitionTime;
+    &:hover {
+      filter: brightness(1.5);
     }
   }
-
-
-  @for $i from 1 through 13 {
-    #box #title .letter:nth-of-type(#{$i}){
-        transition-delay: 0.1s + ($i - 1)*0.05s;
+  #message {
+    color: #674636;
+    font-size: 2rem;
+    text-align: center;
+  }
+  #buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-block-start: 10px;
+    #confirm,
+    #cancel {
+      font-size: 1.5rem;
+      border: none;
+      background-color: #674636;
+      color: #fff8e8;
+      padding-inline: 10px;
+      transition: $transitionTime;
+      &:hover {
+        filter: brightness(1.5);
+      }
     }
   }
+  &.open {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@for $i from 1 through 13 {
+  #entry #title .letter:nth-of-type(#{$i}) {
+    transition-delay: 0.1s + ($i - 1) * 0.05s;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #entry {
+    #title {
+      .letter {
+        font-size: 2rem;
+      }
+    }
+    #middle {
+      flex-direction: column-reverse;
+      #start {
+        font-size: 1.5rem;
+      }
+      * {
+        margin-block: 30px;
+      }
+    }
+    #get-in {
+      font-size: 3rem;
+    }
+  }
+}
+@media screen and (min-width: 577px) and (max-width: 767px) {
+  #entry {
+    #title {
+      .letter {
+        font-size: 4rem;
+      }
+    }
+    #middle {
+      flex-direction: column-reverse;
+      #start {
+        font-size: 2rem;
+      }
+      * {
+        margin-block: 30px;
+      }
+    }
+    #get-in {
+      font-size: 4rem;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  #entry {
+    #title {
+      .letter {
+        font-size: 6rem;
+      }
+    }
+    #middle {
+      #start {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+@media screen and (orientation: landscape) and (min-width: 400px) and (max-height: 576px) {
+  #entry {
+    #title {
+      .letter {
+        font-size: 4rem;
+      }
+    }
+    #middle {
+      #start {
+        font-size: 2rem;
+      }
+      #cover-img{
+        width: 200px;
+      }
+    }
+    #get-in {
+      font-size: 3rem;
+    }
+  }
+}
