@@ -159,7 +159,7 @@
   position: relative;
   height: 100dvh;
   background-color: #fff8e8;
-  border-image-source: url("wood.jpg");
+  border-image-source: url("image/wood.jpg");
   border-image-width: 5px;
   border-image-repeat: stretch;
   border-image-slice: 5;
@@ -240,7 +240,7 @@
   position: relative;
   height: 100dvh;
   background-color: #fff8e8;
-  border-image-source: url("wood.jpg");
+  border-image-source: url("image/wood.jpg");
   border-image-width: 5px;
   border-image-repeat: stretch;
   border-image-slice: 5;
@@ -265,7 +265,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-image-source: url("wood.jpg");
+  border-image-source: url("image/wood.jpg");
   border-image-width: 5px;
   border-image-repeat: stretch;
   border-image-slice: 5;
