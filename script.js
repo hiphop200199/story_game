@@ -11,6 +11,7 @@ const confirm = document.getElementById('confirm');
 const cancel = document.getElementById('cancel');
 const gear = document.getElementById('gear');
 const backToGame = document.getElementById('back-to-game');
+const musicBox = document.getElementById("music-box");
 const BGM = new Audio('calm.mp3');
 const dingSFX = new Audio('ding.mp3');
 let logoAnimation;
@@ -22,12 +23,19 @@ let mouse = document.getElementById('mouse');
 let entry = document.getElementById("entry");
 let game = document.getElementById('game');
 let setting = document.getElementById('setting');
+let settingMusic = document.getElementById('setting-music');
+let settingVolume = document.getElementById('setting-volume');
+let settingFontsize = document.getElementById('setting-fontsize');
+let content = document.getElementById('content');
+let subject = document.getElementById('subject');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 BGM.volume = 0.7;
 BGM.loop = true;
 
-
+window.addEventListener('resize',function(){
+    subject.style.left = `calc(50% - ${subject.getBoundingClientRect().width/2}px)`; 
+})
 window.addEventListener('mousemove',function(e){
     mouse.style.left = e.pageX - 16 + 'px';
     mouse.style.top = e.pageY - 16 + 'px';
@@ -59,6 +67,9 @@ start.addEventListener('click',function(){
         entry.style.display = 'none';
         game.style.display = 'flex';
         BGM.play();
+        settingFontsize.value = 16;
+        settingVolume.value = BGM.volume;
+        subject.style.left = `calc(50% - ${subject.getBoundingClientRect().width/2}px)`; 
     },2000)
 })
 gear.addEventListener('click',function(){
@@ -69,6 +80,16 @@ backToGame.addEventListener('click',function () {
     game.style.display = 'flex';
     setting.style.display = 'none';
   })
+musicBox.addEventListener('click',function(e){
+   settingMusic.toggleAttribute('checked');
+    toggleBGM(e);
+})
+settingVolume.addEventListener('change',function () {
+    BGM.volume =  parseFloat(this.value);
+})
+settingFontsize.addEventListener('change',function () {
+    content.style.fontSize = this.value + 'px';
+})
 //mylogo
 //用來生成一個個粒子
 class Particle{
@@ -156,6 +177,13 @@ function graduallyShowTitle(){
     }
    },TITLE_SHOWING_SPEED);
   }
+
+//用按鈕讓使用者控制音樂播放
+function toggleBGM(event){
+    if (event.cancelable) event.preventDefault();
+    BGM.paused?BGM.play():BGM.pause();
+}
+
 
 
 const effect = new Effect(canvas.width,canvas.height);

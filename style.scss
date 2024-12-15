@@ -11,6 +11,35 @@
   background-color: #674636;
   border-radius: 12px;
 }
+
+//客製化input range track
+#setting #options .custom-range::-webkit-slider-runnable-track{
+  background-color: #f7eed3;
+  height: 0.5rem;
+}
+#setting #options .custom-range::-moz-range-track{
+  background-color: #f7eed3;
+  height: 0.5rem;
+}
+//客製化input range thumb
+#setting #options .custom-range::-webkit-slider-thumb{
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 1rem;
+  height: 2rem;
+  background-color: #674636;
+  position: relative;
+  top: -0.75rem;
+}
+#setting #options .custom-range::-moz-range-thumb{
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 0; /*Removes default border-radius that FF applies*/
+  appearance: none;
+  width: 1rem;
+  height: 2rem;
+  background-color: #674636;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -146,6 +175,13 @@ $getInTime: 1s;
         filter: brightness(1.5);
       }
     }
+    time{
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      color: #674636;
+      font-size: 2rem;
+    }
     #icon{
       position: absolute;
       left: 0;
@@ -158,17 +194,27 @@ $getInTime: 1s;
       border-image-repeat: stretch;
       border-image-slice: 5;
     }
+    #subject{
+      position: absolute;
+      top: 20px;
+      color: #674636;
+      font-size: 4rem;
+      font-weight: 700;
+      text-align: center;
+    }
     #content{
       width: 60%;
       max-width: 800px;
       height: 500px;
-      padding: 30px;
+      padding: 20px;
       overflow-y: auto;
       color: #674636;
       margin-block-end: 30px;
+      font-size: 16px;
       img{
         float: right;
-        width: 200px;
+        width: 60%;
+        max-width: 200px;
       }
     }
     #events{
@@ -220,6 +266,7 @@ $getInTime: 1s;
     border-image-repeat: stretch;
     border-image-slice: 5;
     padding: 30px;
+    width: 200px;
     .subtitles{
       font-size: 2rem;
       color: #674636;
@@ -227,35 +274,47 @@ $getInTime: 1s;
     #music-box{
       display: block;
       position: relative;
-      padding-left: 40px;      
+      width: 32px;
+      height: 32px;
       #setting-music{
           position: absolute;
           opacity: 0;
-          &:checked ~ .custom-checkbox::after{
-              display: block;
+          &:checked ~ #custom-checkbox::after{
+              display: flex;
           }
       }
-      .custom-checkbox{
+      #custom-checkbox{
+          display: block;
           position: absolute;
           left: 0;
-          top: calc(50% - 10px);
-          height: 20px;
-          width: 20px;
+          top: calc(50% - 16px);
+          height: 32px;
+          width: 32px;
+          background-color: #f7eed3;
           border: 3px solid #674636;
           &::after{
-              content: "";
+              content: "✔";
               position: absolute;
               display: none;
-              height: 20px;
-              width: 20px;
-              left: 3px;
-              top: 3px;
-              border-radius: 50%;
-              background-color: #FFF4B7;
+             justify-content: center;
+             align-items: center;
+              height: 32px;
+              width: 32px;
+              left: -3px;
+              top: -3px;
+              color: #fff8e8;
+              font-size: 1.5rem;
+              background-color: #674636;
           }
       }
   }
-    #left-game-button{
+  .custom-range{
+    appearance: none;
+    width: 100%;
+    margin-block: 30px;
+    overflow: visible;
+  }
+  #left-game-button{
       font-size: 1.5rem;
       border: none;
       background-color: #674636;
@@ -347,6 +406,11 @@ $getInTime: 1s;
       font-size: 3rem;
     }
   }
+  #game{
+    #subject{
+      font-size: 2rem;
+    }
+  }
 }
 @media screen and (min-width: 577px) and (max-width: 767px) {
   #entry {
@@ -404,8 +468,13 @@ $getInTime: 1s;
     }
   }
   #game{
+      #subject{
+        font-size: 2rem;
+      }
     #content{
       height: 250px;
+      margin-block-start: 50px;
+      margin-block-end: 20px;
     }
   }
 }

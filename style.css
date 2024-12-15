@@ -15,6 +15,36 @@
   border-radius: 12px;
 }
 
+#setting #options .custom-range::-webkit-slider-runnable-track {
+  background-color: #f7eed3;
+  height: 0.5rem;
+}
+
+#setting #options .custom-range::-moz-range-track {
+  background-color: #f7eed3;
+  height: 0.5rem;
+}
+
+#setting #options .custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 1rem;
+  height: 2rem;
+  background-color: #674636;
+  position: relative;
+  top: -0.75rem;
+}
+
+#setting #options .custom-range::-moz-range-thumb {
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 0; /*Removes default border-radius that FF applies*/
+  -moz-appearance: none;
+       appearance: none;
+  width: 1rem;
+  height: 2rem;
+  background-color: #674636;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -150,6 +180,13 @@
 #game #gear:hover {
   filter: brightness(1.5);
 }
+#game time {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  color: #674636;
+  font-size: 2rem;
+}
 #game #icon {
   position: absolute;
   left: 0;
@@ -162,18 +199,28 @@
   border-image-repeat: stretch;
   border-image-slice: 5;
 }
+#game #subject {
+  position: absolute;
+  top: 20px;
+  color: #674636;
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+}
 #game #content {
   width: 60%;
   max-width: 800px;
   height: 500px;
-  padding: 30px;
+  padding: 20px;
   overflow-y: auto;
   color: #674636;
   margin-block-end: 30px;
+  font-size: 16px;
 }
 #game #content img {
   float: right;
-  width: 200px;
+  width: 60%;
+  max-width: 200px;
 }
 #game #events button {
   font-size: 1.5rem;
@@ -223,6 +270,7 @@
   border-image-repeat: stretch;
   border-image-slice: 5;
   padding: 30px;
+  width: 200px;
 }
 #setting #options .subtitles {
   font-size: 2rem;
@@ -231,33 +279,47 @@
 #setting #options #music-box {
   display: block;
   position: relative;
-  padding-left: 40px;
+  width: 32px;
+  height: 32px;
 }
 #setting #options #music-box #setting-music {
   position: absolute;
   opacity: 0;
 }
-#setting #options #music-box #setting-music:checked ~ .custom-checkbox::after {
-  display: block;
+#setting #options #music-box #setting-music:checked ~ #custom-checkbox::after {
+  display: flex;
 }
-#setting #options #music-box .custom-checkbox {
+#setting #options #music-box #custom-checkbox {
+  display: block;
   position: absolute;
   left: 0;
-  top: calc(50% - 10px);
-  height: 20px;
-  width: 20px;
+  top: calc(50% - 16px);
+  height: 32px;
+  width: 32px;
+  background-color: #f7eed3;
   border: 3px solid #674636;
 }
-#setting #options #music-box .custom-checkbox::after {
-  content: "";
+#setting #options #music-box #custom-checkbox::after {
+  content: "✔";
   position: absolute;
   display: none;
-  height: 20px;
-  width: 20px;
-  left: 3px;
-  top: 3px;
-  border-radius: 50%;
-  background-color: #FFF4B7;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  left: -3px;
+  top: -3px;
+  color: #fff8e8;
+  font-size: 1.5rem;
+  background-color: #674636;
+}
+#setting #options .custom-range {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100%;
+  margin-block: 30px;
+  overflow: visible;
 }
 #setting #options #left-game-button {
   font-size: 1.5rem;
@@ -393,6 +455,9 @@
   #entry #get-in {
     font-size: 3rem;
   }
+  #game #subject {
+    font-size: 2rem;
+  }
 }
 @media screen and (min-width: 577px) and (max-width: 767px) {
   #entry #title .letter {
@@ -432,7 +497,12 @@
   #entry #get-in {
     font-size: 3rem;
   }
+  #game #subject {
+    font-size: 2rem;
+  }
   #game #content {
     height: 250px;
+    margin-block-start: 50px;
+    margin-block-end: 20px;
   }
 }/*# sourceMappingURL=style.css.map */
