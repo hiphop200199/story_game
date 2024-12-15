@@ -6,8 +6,12 @@ const ctx = canvas.getContext('2d');
 const logoImage = document.getElementById("logo-image");
 const closeGameButton = document.getElementById('close-game-button');
 const closeDialogButton = document.getElementById('close-dialog-button');
+const leftGameButton = document.getElementById('left-game-button');
 const confirm = document.getElementById('confirm');
 const cancel = document.getElementById('cancel');
+const gear = document.getElementById('gear');
+const backToGame = document.getElementById('back-to-game');
+const BGM = new Audio('calm.mp3');
 const dingSFX = new Audio('ding.mp3');
 let logoAnimation;
 let letters = document.querySelectorAll(".letter");
@@ -15,14 +19,22 @@ let closeGameDialog = document.getElementById('close-game-dialog');
 let start = document.getElementById('start');
 let coverImg = document.getElementById('cover-img');
 let mouse = document.getElementById('mouse');
+let entry = document.getElementById("entry");
+let game = document.getElementById('game');
+let setting = document.getElementById('setting');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
- 
+BGM.volume = 0.7;
+BGM.loop = true;
 
 
 window.addEventListener('mousemove',function(e){
     mouse.style.left = e.pageX - 16 + 'px';
     mouse.style.top = e.pageY - 16 + 'px';
+})
+leftGameButton.addEventListener('click',function () {
+    closeGameDialog.show();
+    closeGameDialog.classList.add('open');
 })
 closeGameButton.addEventListener('click',function () {
     closeGameDialog.show();
@@ -43,7 +55,20 @@ start.addEventListener('click',function(){
     dingSFX.pause();
     dingSFX.currentTime = 0;
     dingSFX.play(); 
+    setTimeout(()=>{
+        entry.style.display = 'none';
+        game.style.display = 'flex';
+        BGM.play();
+    },2000)
 })
+gear.addEventListener('click',function(){
+    game.style.display = 'none';
+    setting.style.display = 'grid';
+})
+backToGame.addEventListener('click',function () {
+    game.style.display = 'flex';
+    setting.style.display = 'none';
+  })
 //mylogo
 //用來生成一個個粒子
 class Particle{

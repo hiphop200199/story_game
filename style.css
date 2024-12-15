@@ -1,16 +1,16 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap");
 /*chrome,opera,safari,edge客製捲軸*/
-::-webkit-scrollbar {
+#game #content::-webkit-scrollbar {
   -webkit-appearance: none;
-  width: 3px;
+  width: 5px;
 }
 
-::-webkit-scrollbar-track {
+#game #content::-webkit-scrollbar-track {
   background: none;
 }
 
-::-webkit-scrollbar-thumb {
+#game #content::-webkit-scrollbar-thumb {
   background-color: #674636;
   border-radius: 12px;
 }
@@ -18,7 +18,7 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-entry;
+  box-sizing: border-box;
   scroll-behavior: smooth;
   overflow: hidden;
   font-family: "Charm", cursive;
@@ -40,10 +40,15 @@
   width: 100%;
 }
 
-#close-game-button {
+#entry {
+  position: relative;
+  height: 100dvh;
+  background-color: #fff8e8;
+}
+#entry #close-game-button {
   position: absolute;
-  right: 1vw;
-  top: 1dvh;
+  right: 20px;
+  top: 20px;
   z-index: 1;
   color: #674636;
   background: none;
@@ -51,14 +56,8 @@
   font-size: 2rem;
   transition: 0.5s;
 }
-#close-game-button:hover {
+#entry #close-game-button:hover {
   filter: brightness(1.5);
-}
-
-#entry {
-  position: relative;
-  height: 100dvh;
-  background-color: #fff8e8;
 }
 #entry #title {
   text-align: center;
@@ -124,8 +123,152 @@
 
 #game {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
   height: 100dvh;
+  background-color: #fff8e8;
+  border-image-source: url("wood.jpg");
+  border-image-width: 5px;
+  border-image-repeat: stretch;
+  border-image-slice: 5;
+}
+#game #gear {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  transition: 0.5s;
+}
+#game #gear img {
+  width: 100%;
+}
+#game #gear:hover {
+  filter: brightness(1.5);
+}
+#game #icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6rem;
+  height: 6rem;
+  padding: 10px;
+  border-image-source: url("wood.jpg");
+  border-image-width: 0 5px 5px 0;
+  border-image-repeat: stretch;
+  border-image-slice: 5;
+}
+#game #content {
+  width: 60%;
+  max-width: 800px;
+  height: 500px;
+  padding: 30px;
+  overflow-y: auto;
+  color: #674636;
+  margin-block-end: 30px;
+}
+#game #content img {
+  float: right;
+  width: 200px;
+}
+#game #events button {
+  font-size: 1.5rem;
+  border: none;
+  background-color: #674636;
+  color: #fff8e8;
+  padding-inline: 10px;
+  transition: 0.5s;
+}
+#game #events button:hover {
+  filter: brightness(1.5);
+}
+
+#setting {
+  display: none;
+  place-items: center;
+  position: relative;
+  height: 100dvh;
+  background-color: #fff8e8;
+  border-image-source: url("wood.jpg");
+  border-image-width: 5px;
+  border-image-repeat: stretch;
+  border-image-slice: 5;
+}
+#setting #back-to-game {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  transition: 0.5s;
+}
+#setting #back-to-game img {
+  width: 100%;
+}
+#setting #back-to-game:hover {
+  filter: brightness(1.5);
+}
+#setting #options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-image-source: url("wood.jpg");
+  border-image-width: 5px;
+  border-image-repeat: stretch;
+  border-image-slice: 5;
+  padding: 30px;
+}
+#setting #options .subtitles {
+  font-size: 2rem;
+  color: #674636;
+}
+#setting #options #music-box {
+  display: block;
+  position: relative;
+  padding-left: 40px;
+}
+#setting #options #music-box #setting-music {
+  position: absolute;
+  opacity: 0;
+}
+#setting #options #music-box #setting-music:checked ~ .custom-checkbox::after {
+  display: block;
+}
+#setting #options #music-box .custom-checkbox {
+  position: absolute;
+  left: 0;
+  top: calc(50% - 10px);
+  height: 20px;
+  width: 20px;
+  border: 3px solid #674636;
+}
+#setting #options #music-box .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  top: 3px;
+  border-radius: 50%;
+  background-color: #FFF4B7;
+}
+#setting #options #left-game-button {
+  font-size: 1.5rem;
+  border: none;
+  background-color: #674636;
+  color: #fff8e8;
+  padding-inline: 10px;
+  transition: 0.5s;
+}
+#setting #options #left-game-button:hover {
+  filter: brightness(1.5);
 }
 
 #close-game-dialog {
@@ -288,5 +431,8 @@
   }
   #entry #get-in {
     font-size: 3rem;
+  }
+  #game #content {
+    height: 250px;
   }
 }/*# sourceMappingURL=style.css.map */
