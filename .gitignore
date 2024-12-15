@@ -1,2 +1,6 @@
+.firebase/
 firestore.indexes.json
 firestore.rules
+.firebaserc
+firebase.json
+storage.rules
