@@ -194,7 +194,7 @@
   width: 6rem;
   height: 6rem;
   padding: 10px;
-  border-image-source: url("wood.jpg");
+  border-image-source: url("image/wood.jpg");
   border-image-width: 0 5px 5px 0;
   border-image-repeat: stretch;
   border-image-slice: 5;
@@ -440,6 +440,12 @@
 }
 
 @media screen and (max-width: 576px) {
+  * {
+    cursor: auto;
+  }
+  #mouse {
+    display: none;
+  }
   #entry #title .letter {
     font-size: 2rem;
   }
@@ -485,6 +491,15 @@
   }
 }
 @media screen and (orientation: landscape) and (min-width: 400px) and (max-height: 576px) {
+  * {
+    cursor: auto;
+  }
+  #mouse {
+    display: none;
+  }
+  #entry #title {
+    padding-block-end: 2dvh;
+  }
   #entry #title .letter {
     font-size: 4rem;
   }
@@ -501,8 +516,15 @@
     font-size: 2rem;
   }
   #game #content {
-    height: 250px;
-    margin-block-start: 50px;
-    margin-block-end: 20px;
+    height: 200px;
+    margin-block-start: 80px;
+    margin-block-end: 10px;
+  }
+  #setting #options {
+    width: 400px;
+    padding: 15px 30px;
+  }
+  #setting #options .custom-range {
+    margin-block: 15px;
   }
 }/*# sourceMappingURL=style.css.map */
