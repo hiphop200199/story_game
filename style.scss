@@ -155,10 +155,11 @@ $getInTime: 1s;
     position: relative;
     height: 100dvh;
     background-color: #fff8e8;
-    border-image-source: url('image/wood.jpg');
+    border: 5px solid #674636;
+   /*  border-image-source: url('image/wood.jpg');
     border-image-width: 5px;
     border-image-repeat: stretch;
-    border-image-slice: 5;
+    border-image-slice: 5; */
     #gear{
       position: absolute;
       right: 20px;
@@ -189,10 +190,12 @@ $getInTime: 1s;
       width: 6rem;
       height: 6rem;
       padding: 10px;
-      border-image-source: url('image/wood.jpg');
+      border-right: 5px solid #674636;
+      border-bottom: 5px solid #674636;
+     /*  border-image-source: url('image/wood.jpg');
       border-image-width: 0 5px 5px 0;
       border-image-repeat: stretch;
-      border-image-slice: 5;
+      border-image-slice: 5; */
     }
     #subject{
       position: absolute;
@@ -237,10 +240,11 @@ $getInTime: 1s;
   position: relative;
   height: 100dvh;
   background-color: #fff8e8;
-  border-image-source: url('image/wood.jpg');
+  /* border-image-source: url('image/wood.jpg');
   border-image-width: 5px;
   border-image-repeat: stretch;
-  border-image-slice: 5;
+  border-image-slice: 5; */
+  border: 5px solid #674636;
   #back-to-game{
     position: absolute;
     right: 20px;
@@ -261,10 +265,11 @@ $getInTime: 1s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-image-source: url('image/wood.jpg');
+   /*  border-image-source: url('image/wood.jpg');
     border-image-width: 5px;
     border-image-repeat: stretch;
-    border-image-slice: 5;
+    border-image-slice: 5; */
+    border: 5px solid #674636;
     padding: 30px;
     width: 200px;
     .subtitles{

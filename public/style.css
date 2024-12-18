@@ -159,10 +159,11 @@
   position: relative;
   height: 100dvh;
   background-color: #fff8e8;
-  border-image-source: url("image/wood.jpg");
-  border-image-width: 5px;
-  border-image-repeat: stretch;
-  border-image-slice: 5;
+  border: 5px solid #674636;
+  /*  border-image-source: url('image/wood.jpg');
+   border-image-width: 5px;
+   border-image-repeat: stretch;
+   border-image-slice: 5; */
 }
 #game #gear {
   position: absolute;
@@ -194,10 +195,12 @@
   width: 6rem;
   height: 6rem;
   padding: 10px;
-  border-image-source: url("image/wood.jpg");
-  border-image-width: 0 5px 5px 0;
-  border-image-repeat: stretch;
-  border-image-slice: 5;
+  border-right: 5px solid #674636;
+  border-bottom: 5px solid #674636;
+  /*  border-image-source: url('image/wood.jpg');
+   border-image-width: 0 5px 5px 0;
+   border-image-repeat: stretch;
+   border-image-slice: 5; */
 }
 #game #subject {
   position: absolute;
@@ -240,10 +243,11 @@
   position: relative;
   height: 100dvh;
   background-color: #fff8e8;
-  border-image-source: url("image/wood.jpg");
+  /* border-image-source: url('image/wood.jpg');
   border-image-width: 5px;
   border-image-repeat: stretch;
-  border-image-slice: 5;
+  border-image-slice: 5; */
+  border: 5px solid #674636;
 }
 #setting #back-to-game {
   position: absolute;
@@ -265,10 +269,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-image-source: url("image/wood.jpg");
-  border-image-width: 5px;
-  border-image-repeat: stretch;
-  border-image-slice: 5;
+  /*  border-image-source: url('image/wood.jpg');
+   border-image-width: 5px;
+   border-image-repeat: stretch;
+   border-image-slice: 5; */
+  border: 5px solid #674636;
   padding: 30px;
   width: 200px;
 }
