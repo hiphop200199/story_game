@@ -1,4 +1,7 @@
-//變數宣告
+import { Round } from "./round.js";
+//基本環境設定
+
+
 const TITLE_SHOWING_SPEED = 200;
 const TIME_TO_END_ANIMATION = 4000;
 const canvas = document.getElementById("canvas");
@@ -14,6 +17,8 @@ const backToGame = document.getElementById('back-to-game');
 const musicBox = document.getElementById("music-box");
 const BGM = new Audio('music/calm.mp3');
 const dingSFX = new Audio('sfx/ding.mp3');
+
+
 let logoAnimation;
 let letters = document.querySelectorAll(".letter");
 let closeGameDialog = document.getElementById('close-game-dialog');
@@ -26,8 +31,15 @@ let setting = document.getElementById('setting');
 let settingMusic = document.getElementById('setting-music');
 let settingVolume = document.getElementById('setting-volume');
 let settingFontsize = document.getElementById('setting-fontsize');
+
 let content = document.getElementById('content');
 let subject = document.getElementById('subject');
+let events = document.getElementById('events');
+let event1 = document.getElementById('event-1');
+let event2 = document.getElementById('event-2');
+let event3 = document.getElementById('event-3');
+let event4 = document.getElementById('event-4');
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 BGM.volume = 0.7;
@@ -63,6 +75,7 @@ start.addEventListener('click',function(){
     dingSFX.pause();
     dingSFX.currentTime = 0;
     dingSFX.play(); 
+    let round =  new Round()
     setTimeout(()=>{
         entry.style.display = 'none';
         game.style.display = 'flex';
@@ -70,6 +83,7 @@ start.addEventListener('click',function(){
         settingFontsize.value = 16;
         settingVolume.value = BGM.volume;
         subject.style.left = `calc(50% - ${subject.getBoundingClientRect().width/2}px)`; 
+       
     },2000)
 })
 gear.addEventListener('click',function(){
@@ -172,7 +186,7 @@ function cancelAnimationAndShowIndexPage(){
 //標題字母按順序顯示
 function graduallyShowTitle(){
     setTimeout(function(){
-     for(i=0;i<letters.length;i++){
+     for(let i=0;i<letters.length;i++){
       letters[i].style.opacity='1';
     }
    },TITLE_SHOWING_SPEED);

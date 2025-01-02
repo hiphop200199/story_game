@@ -58,12 +58,12 @@
     </div>
     <div id="game">
       <button id="gear"><img src="image/gear.png" alt=""></button>
-      <time>8:00</time>
-      <img id="icon" src="image/pen.png" alt="">
+      <!-- <time>8:00</time> -->
+      <img id="icon" src="" alt="">
       <h1 id="subject">Emily's day</h1>
       <section id="content">
-        <img src="image/pen.png" alt="">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur asperiores quis dolores deserunt cum aperiam aliquam minus dolorum sapiente quia, unde iste facilis reprehenderit quasi impedit, error tenetur mollitia distinctio quae iusto libero obcaecati sit labore repellendus. Quasi maiores ducimus eaque? Cupiditate consequatur maiores at aut ad adipisci corrupti beatae deserunt sapiente dicta? Inventore porro praesentium magnam voluptate distinctio minus laudantium non, recusandae pariatur modi? Nostrum minima architecto sunt vel fuga tempore nemo quas totam voluptatibus, harum, laboriosam animi excepturi consequatur. Eaque ullam quisquam nostrum excepturi velit saepe odit facere. Voluptate et perspiciatis placeat quod quia vel officiis nesciunt sapiente rem magni iste accusantium veniam eligendi dolore aperiam necessitatibus ipsum similique doloribus, enim id explicabo? Dolorum aliquid facilis cupiditate ea labore numquam nam, nemo sunt, earum voluptas deserunt quasi fugit corrupti repellat nisi optio provident eveniet doloremque officiis ullam. Quas, deserunt corrupti, modi molestias quibusdam omnis esse vel fuga minus illum at voluptate error tempore ipsa placeat! Repellendus quos natus officiis tenetur delectus ut accusantium blanditiis fuga deleniti! Repudiandae, explicabo. Ipsam totam dicta recusandae placeat, maxime repudiandae, veritatis sunt iure quae consequatur nam ut itaque magnam ipsa expedita aliquid accusamus, explicabo tempora quaerat id enim? Necessitatibus nisi aliquid minima quod.
+        <!-- <img src="image/pen.png" alt=""> -->
+       
        
       </section>
       <section id="events">
@@ -99,25 +99,10 @@
         <button id="cancel">No</button>
       </section>
     </dialog>
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+    <script type="module" src="general.js"></script>
+    <script type="module" src="round.js"></script>
     
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyAyfGwiJCmZ8eZJQ29sonxdiuxYkPI5BGg",
-        authDomain: "story-game-d12f3.firebaseapp.com",
-        projectId: "story-game-d12f3",
-        storageBucket: "story-game-d12f3.firebasestorage.app",
-        messagingSenderId: "1046002716405",
-        appId: "1:1046002716405:web:1b30842da3df3688f0ffbc"
-      };
-    
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-    </script>
-    <script src="script.js"></script>
   </body>
 </html>
