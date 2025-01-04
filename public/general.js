@@ -1,9 +1,13 @@
-import { Round } from "./round.js";
-//基本環境設定
+import { Round, typewriting } from "./round.js";
 
 
+export const TIME_BETWEEN = 5000;
+export const SHOW_REACT = 3000;
+const PROFILE_END_AND_START_LOADING_SITUATION = 8000
 const TITLE_SHOWING_SPEED = 200;
 const TIME_TO_END_ANIMATION = 4000;
+const TIME_TO_START_GAME = 2000;
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
 const logoImage = document.getElementById("logo-image");
@@ -32,13 +36,14 @@ let settingMusic = document.getElementById('setting-music');
 let settingVolume = document.getElementById('setting-volume');
 let settingFontsize = document.getElementById('setting-fontsize');
 
+let icon = document.getElementById('icon')
 let content = document.getElementById('content');
 let subject = document.getElementById('subject');
-let events = document.getElementById('events');
-let event1 = document.getElementById('event-1');
+
+/* let event1 = document.getElementById('event-1');
 let event2 = document.getElementById('event-2');
 let event3 = document.getElementById('event-3');
-let event4 = document.getElementById('event-4');
+let event4 = document.getElementById('event-4'); */
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -83,8 +88,17 @@ start.addEventListener('click',function(){
         settingFontsize.value = 16;
         settingVolume.value = BGM.volume;
         subject.style.left = `calc(50% - ${subject.getBoundingClientRect().width/2}px)`; 
-       
-    },2000)
+      typewriting(0)
+      setTimeout(() => {
+        round.randomGetSituationDescription(round.situation)
+      }, PROFILE_END_AND_START_LOADING_SITUATION);
+      setTimeout(() => {
+        round.randomGetEvent(round.situation)
+      }, PROFILE_END_AND_START_LOADING_SITUATION + TIME_BETWEEN);
+      setTimeout(() => {
+        round.randomGetReact(round.eNum)
+      }, PROFILE_END_AND_START_LOADING_SITUATION + TIME_BETWEEN + SHOW_REACT);
+    },TIME_TO_START_GAME)
 })
 gear.addEventListener('click',function(){
     game.style.display = 'none';

@@ -214,10 +214,11 @@ $getInTime: 1s;
       color: #674636;
       margin-block-end: 30px;
       font-size: 16px;
+      border: 5px solid #674636;
       img{
-        float: right;
         width: 60%;
         max-width: 200px;
+        margin-block: 5px;
       }
     }
     #events{
@@ -423,6 +424,13 @@ $getInTime: 1s;
     #subject{
       font-size: 2rem;
     }
+    #events{
+      display: flex;
+      flex-direction: column;
+      .event{
+        margin-block: 2px;
+      }
+    }
   }
 }
 @media screen and (min-width: 577px) and (max-width: 767px) {
@@ -443,6 +451,14 @@ $getInTime: 1s;
     }
     #get-in {
       font-size: 4rem;
+    }
+  }
+  #game{
+    #events{
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-template-rows: repeat(2,1fr);
+      gap: 2px;
     }
   }
 }
