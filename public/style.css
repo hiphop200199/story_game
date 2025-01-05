@@ -218,7 +218,7 @@
   overflow-y: auto;
   color: #674636;
   margin-block-end: 30px;
-  font-size: 16px;
+  font-size: 20px;
   border: 5px solid #674636;
 }
 #game #content img {
@@ -231,7 +231,7 @@
   transition: 0.5s;
 }
 #game #events button {
-  font-size: 1.5rem;
+  font-size: 16px;
   border: none;
   background-color: #674636;
   color: #fff8e8;
@@ -239,6 +239,25 @@
   transition: 0.5s;
 }
 #game #events button:hover {
+  filter: brightness(1.5);
+}
+#game #final-btns {
+  opacity: 0;
+  transition: 0.5s;
+}
+#game #final-btns.show {
+  opacity: 1;
+}
+#game #final-btns .final-btn {
+  font-size: 16px;
+  border: none;
+  background-color: #674636;
+  color: #fff8e8;
+  padding-inline: 10px;
+  transition: 0.5s;
+  margin-inline-end: 5px;
+}
+#game #final-btns .final-btn:hover {
   filter: brightness(1.5);
 }
 

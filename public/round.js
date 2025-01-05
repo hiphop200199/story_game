@@ -1,4 +1,4 @@
-import { SHOW_REACT, TIME_BETWEEN } from "./general.js";
+import { BGM,entry,game,closeGameDialog } from "./general.js";
 
 
 // Your web app's Firebase configuration
@@ -16,15 +16,23 @@ const okSFX = new Audio('sfx/ok.mp3');
 const normalSFX = new Audio('sfx/normal.mp3');
 const badSFX = new Audio('sfx/bad.mp3');
 const awfulSFX = new Audio('sfx/awful.mp3');
-const START_NEXT_SITUATION = 5000;
+const PROFILE_END_AND_START_LOADING_SITUATION = 10000 
+const TIME_BETWEEN = 3000;
+const SHOW_REACT = 3000;
+const TIME_TO_START_GAME = 2200;
+const START_NEXT_SITUATION = 3000;
+const APPEND_BUTTONS = 2000;
+const SHOW_BUTTONS = 500;
 let lastTime = 0;
 let timer = 0
-let timeMax = 50
+let timeMax = 40
 let typewriter;
 let wordIndex = 0;
 let storyString = '';
 let events = document.getElementById('events');
 let eventBtns = document.querySelectorAll('.event');
+let icon = document.getElementById('icon')
+
 export class Round{
     score = 50;
     profileNums = [1,3,5,6];
@@ -46,7 +54,7 @@ export class Round{
     characteristic;
     situation = 1;
     constructor(){
-        this.randomGetProfile()
+      
     }
     randomGetProfile(){
         this.pNum = this.profileNums[Math.round(Math.random()*(this.profileNums.length-1))]
@@ -58,92 +66,57 @@ export class Round{
             this.leisure = doc.data().leisure
             this.characteristic = doc.data().characteristic
             icon.src = doc.data().image
+            BGM.src = doc.data().music
             subject.innerText = this.name+"'s day"
             storyString = `Hi.我是${this.name}，平常是一個${this.job}，大家都說我是一個${this.characteristic}的人🤠，我對${this.leisure}有興趣，如果你也剛好對${this.leisure}有興趣的話那太好了~😄今天也是一個平凡的日子吧,大概🤔，看看今天會碰到哪些事吧🫢`;
-        
+            setTimeout(() => {
+                resetTypewritingSetting()
+                typewriting(0)
+            }, TIME_TO_START_GAME);
+            setTimeout(() => {
+                this.randomGetSituationDescription(this.situation)
+            }, PROFILE_END_AND_START_LOADING_SITUATION);
           });
          });
     }
     randomGetSituationDescription(sNum){
         switch(sNum){
-            case 1:
-            case 12:
-            db.collection('situation-description').where('situation_num','==',sNum).get().then((querySnapshot) => {
-                console.log(querySnapshot);
-                
-               let length = querySnapshot.size
-                let seq = Math.round(Math.random()*(length-1))
-                content.innerHTML = '';
-                let img = document.createElement('img');
-                img.src = querySnapshot.docs[seq].data().image
-                let breakline = document.createElement('br')
-                content.append(img,breakline)
-                storyString = querySnapshot.docs[seq].data().description
-                resetTypewritingSetting()
-                typewriting(0)
-               setTimeout(() => {
-                this.randomGetEvent(this.situation)
-               }, TIME_BETWEEN);
-               });
-            break;
             case 13:
             this.getFinal()
             break;
             default:
                 db.collection('situation-description').where('situation_num','==',sNum).where('profile_num','==',this.pNum).get().then((querySnapshot) => {
-                    console.log(querySnapshot);
+                   
                     
                     let length = querySnapshot.size
                      let seq = Math.round(Math.random()*(length-1))
                      this.sdNum = querySnapshot.docs[seq].data().seq
+                     console.log('這次選到的情境是',querySnapshot.docs[seq].data(),'sdNum變成',this.sdNum);
+                     
                      content.innerHTML = '';
-                     let img = document.createElement('img');
-                     img.src = querySnapshot.docs[seq].data().image
-                     let breakline = document.createElement('br')
-                     content.append(img,breakline)
+                     let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
+                     content.innerHTML+=htmlString;
                      storyString = querySnapshot.docs[seq].data().description
                      resetTypewritingSetting()
                      typewriting(0)
                      setTimeout(() => {
-                        this.randomGetEvent(this.situation)
+                        this.randomGetEvent()
                        }, TIME_BETWEEN);
                     });
                 break;
         }
     }
-    randomGetEvent(sNum){
-        switch(sNum){
-            case 1:
-            case 12:
-            db.collection('event').where('situation_num','==',sNum).get().then((querySnapshot) => {
-                console.log(querySnapshot);
+    randomGetEvent(){
+    
+                db.collection('event').where('sd_num','==',this.sdNum).get().then((querySnapshot) => {
                 
-               let length = querySnapshot.size
-                let seq = Math.round(Math.random()*(length-1))
-                this.eNum = querySnapshot.docs[seq].data().seq
-                let img = document.createElement('img');
-                img.src = querySnapshot.docs[seq].data().image
-                let breakline = document.createElement('br')
-                content.append(breakline,img,breakline)
-                storyString = querySnapshot.docs[seq].data().description
-                resetTypewritingSetting()
-                typewriting(0)
-                setTimeout(() => {
-                    this.randomGetReact(this.eNum)
-                }, SHOW_REACT);
-               });
-               break;
-               default:
-                db.collection('event').where('sd_num','==',this.sdNum).where('profile_num','==',this.pNum).get().then((querySnapshot) => {
-                   console.log(querySnapshot);
                    
                     let length = querySnapshot.size
                      let seq = Math.round(Math.random()*(length-1))
+                     console.log('這次選到的事件是',querySnapshot.docs[seq].data());
                      this.eNum =  querySnapshot.docs[seq].data().seq
-                     let img = document.createElement('img');
-                     img.src = querySnapshot.docs[seq].data().image
-                     let breakline = document.createElement('br')
-                    content.append(breakline,img,breakline)
+                     let htmlString = `<br><img src="${querySnapshot.docs[seq].data().image}"/><br>`;
+                     content.innerHTML+=htmlString;
                      storyString = querySnapshot.docs[seq].data().description
                      resetTypewritingSetting()
                      typewriting(0)
@@ -151,13 +124,12 @@ export class Round{
                         this.randomGetReact(this.eNum)
                     }, SHOW_REACT);
                     });
-                break;
-        }
+          
     }
     randomGetReact(eNum){
        
             db.collection('react').where('event_num','==',eNum).get().then((querySnapshot) => {
-              console.log(querySnapshot.docs[0].data().seq);
+           
               
               for(let i=0;i<eventBtns.length;i++){
                 eventBtns[i].innerText = querySnapshot.docs[i].data().description 
@@ -170,7 +142,7 @@ export class Round{
         }
         randomGetResult(rNum){
             db.collection('result').where('react_num','==',rNum).get().then((querySnapshot) => {      
-                console.log(querySnapshot.docs[0].data());
+           
                         
                 switch(querySnapshot.docs[0].data().score_operation){
                    case this.resultSFXs.awful:
@@ -192,12 +164,11 @@ export class Round{
                         wonderfulSFX.play();
                     break;
                 }
-                this.score+=querySnapshot.docs[0].data().score_operation
+                this.score+=Number(querySnapshot.docs[0].data().score_operation) 
                 this.situation++
                 events.style.opacity = '0'
-                let breakline = document.createElement('br')
-                let separateString = '~~~~~~~~~~'
-                content.append(breakline,separateString,breakline)
+                let htmlString = `<br>~~~~~~~~~~<br>`;
+                content.innerHTML+=htmlString;
                 storyString = querySnapshot.docs[0].data().description
                 resetTypewritingSetting()
                 typewriting(0)
@@ -210,20 +181,48 @@ export class Round{
             let level;
             if(this.score < 40){
                 level = 1;
-            }else if(this.score >=40 && this.score <60){
+            }else if(this.score >=40 && this.score <65){
                 level = 2;
             }else{
                 level = 3;
             }
             db.collection('final').where('level','==',level).get().then((querySnapshot)=>{
-                console.log(querySnapshot);
+              
                 
                 let length = querySnapshot.size
                 let seq = Math.round(Math.random()*(length-1))
+                console.log('這次的結局是',querySnapshot.docs[seq].data());
                 content.innerHTML = ''
+                let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>噢!你的得分是<strong>${this.score}</strong>分唷!<br>`;
+                content.innerHTML+=htmlString;
                 storyString = querySnapshot.docs[seq].data().description
                 resetTypewritingSetting()
                 typewriting(0)
+                setTimeout(() => {
+                    let buttons = document.createElement('section')
+                    buttons.id = 'final-btns'
+                    let backToTitle = document.createElement('button')
+                    backToTitle.innerText = '回到標題'
+                    backToTitle.classList.add('final-btn')
+                    backToTitle.addEventListener('click',function () {
+                        BGM.pause()
+                        entry.style.display = 'block'
+                        game.style.display = 'none'
+                        content.innerHTML = ''
+                      })
+                    let leaveGame = document.createElement('button')
+                    leaveGame.innerText = '結束遊戲'
+                    leaveGame.classList.add('final-btn')
+                    leaveGame.addEventListener('click',function(){
+                        closeGameDialog.show();
+                        closeGameDialog.classList.add('open');
+                    })
+                    buttons.append(backToTitle,leaveGame)
+                    content.appendChild(buttons)
+                    setTimeout(() => {
+                        buttons.classList.add('show')
+                    }, SHOW_BUTTONS);
+                }, APPEND_BUTTONS);
             })
         }
     

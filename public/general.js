@@ -1,9 +1,11 @@
-import { Round, typewriting } from "./round.js";
+import { Round} from "./round.js";
+
+export let BGM = new Audio();
+export let closeGameDialog = document.getElementById('close-game-dialog');
+export let entry = document.getElementById("entry");
+export let game = document.getElementById('game');
 
 
-export const TIME_BETWEEN = 5000;
-export const SHOW_REACT = 3000;
-const PROFILE_END_AND_START_LOADING_SITUATION = 8000
 const TITLE_SHOWING_SPEED = 200;
 const TIME_TO_END_ANIMATION = 4000;
 const TIME_TO_START_GAME = 2000;
@@ -19,35 +21,28 @@ const cancel = document.getElementById('cancel');
 const gear = document.getElementById('gear');
 const backToGame = document.getElementById('back-to-game');
 const musicBox = document.getElementById("music-box");
-const BGM = new Audio('music/calm.mp3');
 const dingSFX = new Audio('sfx/ding.mp3');
 
 
 let logoAnimation;
 let letters = document.querySelectorAll(".letter");
-let closeGameDialog = document.getElementById('close-game-dialog');
 let start = document.getElementById('start');
 let coverImg = document.getElementById('cover-img');
 let mouse = document.getElementById('mouse');
-let entry = document.getElementById("entry");
-let game = document.getElementById('game');
 let setting = document.getElementById('setting');
 let settingMusic = document.getElementById('setting-music');
 let settingVolume = document.getElementById('setting-volume');
 let settingFontsize = document.getElementById('setting-fontsize');
 
-let icon = document.getElementById('icon')
+let round;
 let content = document.getElementById('content');
 let subject = document.getElementById('subject');
 
-/* let event1 = document.getElementById('event-1');
-let event2 = document.getElementById('event-2');
-let event3 = document.getElementById('event-3');
-let event4 = document.getElementById('event-4'); */
+
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-BGM.volume = 0.7;
+BGM.volume = 0.5;
 BGM.loop = true;
 
 window.addEventListener('resize',function(){
@@ -80,24 +75,16 @@ start.addEventListener('click',function(){
     dingSFX.pause();
     dingSFX.currentTime = 0;
     dingSFX.play(); 
-    let round =  new Round()
+   round.randomGetProfile()
     setTimeout(()=>{
         entry.style.display = 'none';
         game.style.display = 'flex';
         BGM.play();
-        settingFontsize.value = 16;
+        settingMusic.setAttribute('checked',true)
+        settingFontsize.value = 20;
         settingVolume.value = BGM.volume;
         subject.style.left = `calc(50% - ${subject.getBoundingClientRect().width/2}px)`; 
-      typewriting(0)
-      setTimeout(() => {
-        round.randomGetSituationDescription(round.situation)
-      }, PROFILE_END_AND_START_LOADING_SITUATION);
-      setTimeout(() => {
-        round.randomGetEvent(round.situation)
-      }, PROFILE_END_AND_START_LOADING_SITUATION + TIME_BETWEEN);
-      setTimeout(() => {
-        round.randomGetReact(round.eNum)
-      }, PROFILE_END_AND_START_LOADING_SITUATION + TIME_BETWEEN + SHOW_REACT);
+    
     },TIME_TO_START_GAME)
 })
 gear.addEventListener('click',function(){
@@ -218,7 +205,7 @@ const effect = new Effect(canvas.width,canvas.height);
 effect.init(ctx);
 animate();
 cancelAnimationAndShowIndexPage();
-
+round = new Round()
 
 
 

@@ -213,7 +213,7 @@ $getInTime: 1s;
       overflow-y: auto;
       color: #674636;
       margin-block-end: 30px;
-      font-size: 16px;
+      font-size: 20px;
       border: 5px solid #674636;
       img{
         width: 60%;
@@ -225,12 +225,31 @@ $getInTime: 1s;
       opacity: 0;
       transition: $transitionTime;
       button{
-        font-size: 1.5rem;
+        font-size: 16px;
         border: none;
         background-color: #674636;
         color: #fff8e8;
         padding-inline: 10px;
         transition: $transitionTime;
+        &:hover {
+          filter: brightness(1.5);
+        }
+      }
+    }
+    #final-btns{
+      opacity: 0;
+      transition: $transitionTime;
+      &.show{
+        opacity: 1;
+      }
+      .final-btn{
+        font-size: 16px;
+        border: none;
+        background-color: #674636;
+        color: #fff8e8;
+        padding-inline: 10px;
+        transition: $transitionTime;
+        margin-inline-end: 5px;
         &:hover {
           filter: brightness(1.5);
         }
