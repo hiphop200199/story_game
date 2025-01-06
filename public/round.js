@@ -17,15 +17,16 @@ const normalSFX = new Audio('sfx/normal.mp3');
 const badSFX = new Audio('sfx/bad.mp3');
 const awfulSFX = new Audio('sfx/awful.mp3');
 const PROFILE_END_AND_START_LOADING_SITUATION = 10000 
-const TIME_BETWEEN = 3000;
-const SHOW_REACT = 3000;
+const TIME_BETWEEN = 4000;
+const SHOW_REACT = 4000;
+const WAIT_TYPING =2000;
 const TIME_TO_START_GAME = 2200;
 const START_NEXT_SITUATION = 3000;
-const APPEND_BUTTONS = 2000;
+const APPEND_BUTTONS = 3000;
 const SHOW_BUTTONS = 500;
 let lastTime = 0;
 let timer = 0
-let timeMax = 40
+let timeMax = 20
 let typewriter;
 let wordIndex = 0;
 let storyString = '';
@@ -108,14 +109,14 @@ export class Round{
                      content.innerHTML = '';
                      storyString = querySnapshot.docs[seq].data().description
                      resetTypewritingSetting()
+                     typewriting(0)
                      let img = document.createElement('img')
                      let br = document.createElement('br')
-                     content.append(img,br)
+                     let br2 = document.createElement('br')
                      img.src = querySnapshot.docs[seq].data().image
-                     img.onload = function () {
-                   
-                        typewriting(0)
-                       }
+                    setTimeout(() => {
+                        content.append(br,img,br2)
+                    }, WAIT_TYPING);
                     /*  let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
                      content.innerHTML+=htmlString; */
                     
@@ -139,15 +140,16 @@ export class Round{
                      this.eNum = querySnapshot.docs[seq].data().seq
                      storyString = querySnapshot.docs[seq].data().description
                      resetTypewritingSetting()
+                     typewriting(0)
                      let img = document.createElement('img')
                      let br1 = document.createElement('br')
                      let br2 = document.createElement('br')
-                     content.append(br1,img,br2)
                      img.src = querySnapshot.docs[seq].data().image
-                     img.onload = function () {
-                     
-                        typewriting(0)
-                       }
+                     setTimeout(() => {
+                        content.append(br1,img,br2)
+                    }, WAIT_TYPING);
+                  
+                    
                     /*  let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
                      content.innerHTML+=htmlString; */
                     
@@ -238,12 +240,12 @@ export class Round{
                 strong.innerHTML = this.score
                 let string2 = document.createTextNode('分唷!')
                 resetTypewritingSetting()
-                content.append(img,br1,string,strong,string2,br2)
                 img.src = querySnapshot.docs[seq].data().image
-                img.onload = function () {
-               
-                   typewriting(0)
-                  }
+                content.append(string,strong,string2,br1)
+                typewriting(0)
+                setTimeout(() => {
+                    content.append(br2,img)
+                }, WAIT_TYPING);
                /*  let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
                 content.innerHTML+=htmlString; */
                
