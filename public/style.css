@@ -553,10 +553,11 @@
   }
   #game #subject {
     font-size: 1.5rem;
+    top: 10px;
   }
   #game #content {
-    height: 150px;
-    margin-block-start: 50px;
+    height: 180px;
+    margin-block-start: 40px;
     margin-block-end: 20px;
   }
   #setting #back-to-game {
@@ -565,10 +566,10 @@
   }
   #setting #options {
     width: 500px;
-    padding: 15px 30px;
+    padding: 10px 30px;
   }
   #setting #options .subtitles {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   #setting #options #music-box {
     width: 24px;
@@ -590,5 +591,8 @@
   }
   #setting #options .custom-range {
     margin-block: 15px;
+  }
+  #setting #options #left-game-button {
+    font-size: 1rem;
   }
 }/*# sourceMappingURL=style.css.map */

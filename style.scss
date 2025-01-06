@@ -523,10 +523,11 @@ $getInTime: 1s;
   #game{
       #subject{
         font-size: 1.5rem;
+        top: 10px;
       }
     #content{
-      height: 150px;
-      margin-block-start: 50px;
+      height: 180px;
+      margin-block-start: 40px;
       margin-block-end: 20px;
     }
   }
@@ -537,9 +538,9 @@ $getInTime: 1s;
     }
     #options{
       width: 500px;
-      padding: 15px 30px;
+      padding: 10px 30px;
       .subtitles{
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
       #music-box{
         width: 24px;
@@ -561,6 +562,9 @@ $getInTime: 1s;
     }
       .custom-range{
         margin-block: 15px;
+      }
+      #left-game-button{
+        font-size: 1rem;
       }
     }
    
