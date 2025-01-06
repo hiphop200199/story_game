@@ -540,31 +540,53 @@
     display: none;
   }
   #entry #title {
-    padding-block-end: 2dvh;
+    padding-block-end: 15dvh;
   }
   #entry #title .letter {
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
   #entry #middle #start {
     font-size: 2rem;
   }
   #entry #middle #cover-img {
-    width: 200px;
-  }
-  #entry #get-in {
-    font-size: 3rem;
+    width: 150px;
   }
   #game #subject {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   #game #content {
-    height: 200px;
-    margin-block-start: 80px;
-    margin-block-end: 10px;
+    height: 150px;
+    margin-block-start: 50px;
+    margin-block-end: 20px;
+  }
+  #setting #back-to-game {
+    width: 1.5rem;
+    height: 1.5rem;
   }
   #setting #options {
-    width: 400px;
+    width: 500px;
     padding: 15px 30px;
+  }
+  #setting #options .subtitles {
+    font-size: 1.5rem;
+  }
+  #setting #options #music-box {
+    width: 24px;
+    height: 24px;
+  }
+  #setting #options #music-box #custom-checkbox {
+    top: calc(50% - 12px);
+    height: 24px;
+    width: 24px;
+  }
+  #setting #options #music-box #custom-checkbox::after {
+    height: 24px;
+    width: 24px;
+    left: -3px;
+    top: -3px;
+    color: #fff8e8;
+    font-size: 1rem;
+    background-color: #674636;
   }
   #setting #options .custom-range {
     margin-block: 15px;

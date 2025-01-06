@@ -505,9 +505,9 @@ $getInTime: 1s;
   }
   #entry {
     #title {
-      padding-block-end: 2dvh;
+      padding-block-end: 15dvh;
       .letter {
-        font-size: 4rem;
+        font-size: 2.5rem;
       }
     }
     #middle {
@@ -515,27 +515,50 @@ $getInTime: 1s;
         font-size: 2rem;
       }
       #cover-img{
-        width: 200px;
+        width: 150px;
       }
     }
-    #get-in {
-      font-size: 3rem;
-    }
+    
   }
   #game{
       #subject{
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
     #content{
-      height: 200px;
-      margin-block-start: 80px;
-      margin-block-end: 10px;
+      height: 150px;
+      margin-block-start: 50px;
+      margin-block-end: 20px;
     }
   }
   #setting{
+    #back-to-game{
+      width: 1.5rem;
+      height: 1.5rem;
+    }
     #options{
-      width: 400px;
+      width: 500px;
       padding: 15px 30px;
+      .subtitles{
+        font-size: 1.5rem;
+      }
+      #music-box{
+        width: 24px;
+        height: 24px;    
+        #custom-checkbox{
+            top: calc(50% - 12px);
+            height: 24px;
+            width: 24px;
+            &::after{
+                height: 24px;
+                width: 24px;
+                left: -3px;
+                top: -3px;
+                color: #fff8e8;
+                font-size: 1rem;
+                background-color: #674636;
+            }
+        }
+    }
       .custom-range{
         margin-block: 15px;
       }
@@ -543,4 +566,5 @@ $getInTime: 1s;
    
    
   }
+ 
 }
