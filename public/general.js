@@ -75,6 +75,7 @@ start.addEventListener('click',function(){
     dingSFX.pause();
     dingSFX.currentTime = 0;
     dingSFX.play(); 
+    round.resetRoundSetting()
    round.randomGetProfile()
     setTimeout(()=>{
         entry.style.display = 'none';

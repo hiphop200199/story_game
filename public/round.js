@@ -56,6 +56,18 @@ export class Round{
     constructor(){
       
     }
+    resetRoundSetting(){
+        this.score = 50
+        this.pNum = null
+        this.sdNum = null
+        this.eNum = null
+        this.rNum = null
+        this.job = null
+        this.name = null
+        this.leisure = null
+        this.characteristic = null
+        this.situation = 1
+    }
     randomGetProfile(){
         this.pNum = this.profileNums[Math.round(Math.random()*(this.profileNums.length-1))]
         db.collection('profile').where('seq','==',this.pNum).get().then((querySnapshot) => {
@@ -69,8 +81,8 @@ export class Round{
             BGM.src = doc.data().music
             subject.innerText = this.name+"'s day"
             storyString = `Hi.我是${this.name}，平常是一個${this.job}，大家都說我是一個${this.characteristic}的人🤠，我對${this.leisure}有興趣，如果你也剛好對${this.leisure}有興趣的話那太好了~😄今天也是一個平凡的日子吧,大概🤔，看看今天會碰到哪些事吧🫢`;
+            resetTypewritingSetting()
             setTimeout(() => {
-                resetTypewritingSetting()
                 typewriting(0)
             }, TIME_TO_START_GAME);
             setTimeout(() => {
@@ -91,14 +103,24 @@ export class Round{
                     let length = querySnapshot.size
                      let seq = Math.round(Math.random()*(length-1))
                      this.sdNum = querySnapshot.docs[seq].data().seq
+                  
                      console.log('這次選到的情境是',querySnapshot.docs[seq].data(),'sdNum變成',this.sdNum);
-                     
                      content.innerHTML = '';
-                     let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
-                     content.innerHTML+=htmlString;
                      storyString = querySnapshot.docs[seq].data().description
                      resetTypewritingSetting()
-                     typewriting(0)
+                     let img = document.createElement('img')
+                     let br = document.createElement('br')
+                     content.append(img,br)
+                     img.src = querySnapshot.docs[seq].data().image
+                     img.onload = function () {
+                   
+                        typewriting(0)
+                       }
+                    /*  let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
+                     content.innerHTML+=htmlString; */
+                    
+                   /*   resetTypewritingSetting()
+                     typewriting(0) */
                      setTimeout(() => {
                         this.randomGetEvent()
                        }, TIME_BETWEEN);
@@ -114,12 +136,23 @@ export class Round{
                     let length = querySnapshot.size
                      let seq = Math.round(Math.random()*(length-1))
                      console.log('這次選到的事件是',querySnapshot.docs[seq].data());
-                     this.eNum =  querySnapshot.docs[seq].data().seq
-                     let htmlString = `<br><img src="${querySnapshot.docs[seq].data().image}"/><br>`;
-                     content.innerHTML+=htmlString;
+                     this.eNum = querySnapshot.docs[seq].data().seq
                      storyString = querySnapshot.docs[seq].data().description
                      resetTypewritingSetting()
-                     typewriting(0)
+                     let img = document.createElement('img')
+                     let br1 = document.createElement('br')
+                     let br2 = document.createElement('br')
+                     content.append(br1,img,br2)
+                     img.src = querySnapshot.docs[seq].data().image
+                     img.onload = function () {
+                     
+                        typewriting(0)
+                       }
+                    /*  let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
+                     content.innerHTML+=htmlString; */
+                    
+                   /*   resetTypewritingSetting()
+                     typewriting(0) */
                      setTimeout(() => {
                         this.randomGetReact(this.eNum)
                     }, SHOW_REACT);
@@ -142,8 +175,8 @@ export class Round{
         }
         randomGetResult(rNum){
             db.collection('result').where('react_num','==',rNum).get().then((querySnapshot) => {      
-           
-                        
+                resetTypewritingSetting()
+                storyString = querySnapshot.docs[0].data().description
                 switch(querySnapshot.docs[0].data().score_operation){
                    case this.resultSFXs.awful:
                         awfulSFX.play();
@@ -167,10 +200,13 @@ export class Round{
                 this.score+=Number(querySnapshot.docs[0].data().score_operation) 
                 this.situation++
                 events.style.opacity = '0'
-                let htmlString = `<br>~~~~~~~~~~<br>`;
-                content.innerHTML+=htmlString;
-                storyString = querySnapshot.docs[0].data().description
-                resetTypewritingSetting()
+                //let htmlString = `<br>~~~~~~~~~~<br>`;
+               // content.innerHTML+=htmlString;
+                let br1 = document.createElement('br')
+                let br2 = document.createElement('br')
+                let string = document.createTextNode('~~~~~~~~')
+                content.append(br1,string,br2)
+
                 typewriting(0)
                 setTimeout(() => {
                     this.randomGetSituationDescription(this.situation)
@@ -193,11 +229,31 @@ export class Round{
                 let seq = Math.round(Math.random()*(length-1))
                 console.log('這次的結局是',querySnapshot.docs[seq].data());
                 content.innerHTML = ''
-                let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>噢!你的得分是<strong>${this.score}</strong>分唷!<br>`;
+                storyString = querySnapshot.docs[seq].data().description
+                let img = document.createElement('img')
+                let br1 = document.createElement('br')
+                let br2 = document.createElement('br')
+                let string = document.createTextNode('噢!你的得分是')
+                let strong = document.createElement('strong')
+                strong.innerHTML = this.score
+                let string2 = document.createTextNode('分唷!')
+                resetTypewritingSetting()
+                content.append(img,br1,string,strong,string2,br2)
+                img.src = querySnapshot.docs[seq].data().image
+                img.onload = function () {
+               
+                   typewriting(0)
+                  }
+               /*  let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>`;
+                content.innerHTML+=htmlString; */
+               
+              /*   resetTypewritingSetting()
+                typewriting(0) */
+              /*   let htmlString = `<img src="${querySnapshot.docs[seq].data().image}"/><br>噢!你的得分是<strong>${this.score}</strong>分唷!<br>`;
                 content.innerHTML+=htmlString;
                 storyString = querySnapshot.docs[seq].data().description
                 resetTypewritingSetting()
-                typewriting(0)
+                typewriting(0) */
                 setTimeout(() => {
                     let buttons = document.createElement('section')
                     buttons.id = 'final-btns'
