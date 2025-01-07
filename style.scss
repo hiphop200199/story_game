@@ -70,7 +70,11 @@ $getInTime: 1s;
 }
 
 #entry {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  justify-content: space-between;
+  align-items: center;
   height: 100dvh;
   background-color: #fff8e8;
   #close-game-button {
@@ -88,9 +92,7 @@ $getInTime: 1s;
     }
   }
   #title {
-    text-align: center;
     padding-block-start: 2dvh;
-    padding-block-end: 10dvh;
     .letter {
       opacity: 0;
       transition-duration: 1s;
@@ -139,18 +141,16 @@ $getInTime: 1s;
     }
   }
   #copyright {
-    position: absolute;
-    bottom: 0;
+    text-align: center;
     width: 100%;
     background-color: #674636;
     color: #fff8e8;
-    text-align: center;
   }
 }
 #game{
     display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     position: relative;
     height: 100dvh;
@@ -198,17 +198,16 @@ $getInTime: 1s;
       border-image-slice: 5; */
     }
     #subject{
-      position: absolute;
-      top: 20px;
       color: #674636;
       font-size: 4rem;
       font-weight: 700;
       text-align: center;
     }
     #content{
-      width: 60%;
+      width: 60vw;
       max-width: 800px;
-      height: 400px;
+      max-height: 400px;
+      height: 45dvh;
       padding: 20px;
       overflow-y: auto;
       color: #674636;
@@ -219,6 +218,25 @@ $getInTime: 1s;
         width: 60%;
         max-width: 200px;
         margin-block: 5px;
+      }
+      #final-btns{
+        opacity: 0;
+        transition: $transitionTime;
+        &.show{
+          opacity: 1;
+        }
+        .final-btn{
+          font-size: 16px;
+          border: none;
+          background-color: #674636;
+          color: #fff8e8;
+          padding-inline: 10px;
+          transition: $transitionTime;
+          margin-inline-end: 5px;
+          &:hover {
+            filter: brightness(1.5);
+          }
+        }
       }
     }
     #events{
@@ -236,25 +254,9 @@ $getInTime: 1s;
         }
       }
     }
-    #final-btns{
-      opacity: 0;
-      transition: $transitionTime;
-      &.show{
-        opacity: 1;
-      }
-      .final-btn{
-        font-size: 16px;
-        border: none;
-        background-color: #674636;
-        color: #fff8e8;
-        padding-inline: 10px;
-        transition: $transitionTime;
-        margin-inline-end: 5px;
-        &:hover {
-          filter: brightness(1.5);
-        }
-      }
-    }
+   
+  
+    
 }
 #setting{
   display: none;
@@ -435,21 +437,26 @@ $getInTime: 1s;
         margin-block: 30px;
       }
     }
-    #get-in {
-      font-size: 3rem;
-    }
+ 
   }
   #game{
-    #subject{
-      font-size: 2rem;
+    #icon{
+      width: 4rem;
+      height: 4rem;
     }
-    #events{
-      display: flex;
-      flex-direction: column;
-      .event{
-        margin-block: 2px;
+      
+      #subject{
+        font-size: 2rem;
       }
-    }
+      #events{
+        display: flex;
+        flex-direction: column;
+        .event{
+          margin-block: 2px;
+        }
+      }
+    
+  
   }
 }
 @media screen and (min-width: 577px) and (max-width: 767px) {
@@ -468,9 +475,7 @@ $getInTime: 1s;
         margin-block: 30px;
       }
     }
-    #get-in {
-      font-size: 4rem;
-    }
+   
   }
   #game{
     #events{
@@ -505,7 +510,6 @@ $getInTime: 1s;
   }
   #entry {
     #title {
-      padding-block-end: 15dvh;
       .letter {
         font-size: 2.5rem;
       }
@@ -523,11 +527,10 @@ $getInTime: 1s;
   #game{
       #subject{
         font-size: 1.5rem;
-        top: 10px;
       }
     #content{
-      height: 180px;
-      margin-block-start: 40px;
+      max-height: 180px;
+      height: 60dvh;
       margin-block-end: 20px;
     }
   }

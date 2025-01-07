@@ -45,9 +45,7 @@ canvas.height = window.innerHeight;
 BGM.volume = 0.5;
 BGM.loop = true;
 
-window.addEventListener('resize',function(){
-    subject.style.left = `calc(50% - ${subject.getBoundingClientRect().width/2}px)`; 
-})
+
 window.addEventListener('mousemove',function(e){
     mouse.style.left = e.pageX - 16 + 'px';
     mouse.style.top = e.pageY - 16 + 'px';
