@@ -1,4 +1,4 @@
-import { BGM,entry,game,closeGameDialog } from "./general.js";
+import { BGM,entry,game } from "./general.js";
 
 
 // Your web app's Firebase configuration
@@ -268,14 +268,14 @@ export class Round{
                         game.style.display = 'none'
                         content.innerHTML = ''
                       })
-                    let leaveGame = document.createElement('button')
+                  /*   let leaveGame = document.createElement('button')
                     leaveGame.innerText = '結束遊戲'
                     leaveGame.classList.add('final-btn')
                     leaveGame.addEventListener('click',function(){
                         closeGameDialog.show();
                         closeGameDialog.classList.add('open');
-                    })
-                    buttons.append(backToTitle,leaveGame)
+                    }) */
+                    buttons.append(backToTitle)
                     content.appendChild(buttons)
                     setTimeout(() => {
                         buttons.classList.add('show')

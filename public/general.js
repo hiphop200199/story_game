@@ -1,7 +1,7 @@
 import { Round} from "./round.js";
 
 export let BGM = new Audio();
-export let closeGameDialog = document.getElementById('close-game-dialog');
+//export let closeGameDialog = document.getElementById('close-game-dialog');
 export let entry = document.getElementById("entry");
 export let game = document.getElementById('game');
 
@@ -13,11 +13,11 @@ const TIME_TO_START_GAME = 2000;
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
 const logoImage = document.getElementById("logo-image");
-const closeGameButton = document.getElementById('close-game-button');
-const closeDialogButton = document.getElementById('close-dialog-button');
-const leftGameButton = document.getElementById('left-game-button');
-const confirm = document.getElementById('confirm');
-const cancel = document.getElementById('cancel');
+//const closeGameButton = document.getElementById('close-game-button');
+//const closeDialogButton = document.getElementById('close-dialog-button');
+//const leftGameButton = document.getElementById('left-game-button');
+//const confirm = document.getElementById('confirm');
+//const cancel = document.getElementById('cancel');
 const gear = document.getElementById('gear');
 const backToGame = document.getElementById('back-to-game');
 const musicBox = document.getElementById("music-box");
@@ -50,25 +50,31 @@ window.addEventListener('mousemove',function(e){
     mouse.style.left = e.pageX - 16 + 'px';
     mouse.style.top = e.pageY - 16 + 'px';
 })
-leftGameButton.addEventListener('click',function () {
+/* leftGameButton.addEventListener('click',function () {
     closeGameDialog.show();
     closeGameDialog.classList.add('open');
-})
-closeGameButton.addEventListener('click',function () {
+}) */
+/* closeGameButton.addEventListener('click',function () {
     closeGameDialog.show();
     closeGameDialog.classList.add('open');
-})
-closeDialogButton.addEventListener('click',function () {
+}) */
+/* closeDialogButton.addEventListener('click',function () {
     closeGameDialog.classList.remove('open');
     setTimeout(()=>closeGameDialog.close(),500);
-  })
-cancel.addEventListener('click',function () {
+  }) */
+/* cancel.addEventListener('click',function () {
     closeGameDialog.classList.remove('open');
     setTimeout(()=>closeGameDialog.close(),500);
-  })
-confirm.addEventListener('click',function () {
-   window.close();
-  })
+  }) */
+/* confirm.addEventListener('click',function () {
+    let page = window.open('','_self');
+    console.log(page);
+    
+    setTimeout(() => {
+        page.close();
+    }, 1000); 
+  
+  }) */
 start.addEventListener('click',function(){
     dingSFX.pause();
     dingSFX.currentTime = 0;
